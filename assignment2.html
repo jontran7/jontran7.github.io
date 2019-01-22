@@ -12,14 +12,68 @@
     <body> 
 
         <div class="header">
-            <h1>Example Student's Assignment 2!</h1>
+            <h1>jonathan's Assignment 2!</h1>
             <p>
-                here is the calculations and schematic
+                here is the calculations and schematic, for the current flowing through the button and the LEDs i used 1k resistors because i calculated i needed at least 25ohms of resistance to not mess up the board, and I had the 1k resistors lying around so i used those out of convenience
+
             <img src="IMG_4027.JPG" width=400></a>
             </p>
             <p>
             Here is all the documentation for assignment 2!
             </p>
+        </div>
+
+
+        <div>
+            <h1>in action</h1>
+            <img src="fade.gif" width=400></a>
+
+            <p> here's the code</p>
+            <code>
+                
+// constants won't change. They're used here to set pin numbers:
+const int buttonPin = 2;     // the number of the pushbutton pin
+const int ledPin =  11;      // the number of the LED pin
+const int ledPin2 = 10;      // the number of the LED pin
+
+// variables will change:
+int buttonState = 0;         // variable for reading the pushbutton status
+
+void setup() {
+  // initialize the LED pins as an output:
+  pinMode(ledPin, OUTPUT);
+  pinMode(ledPin2, OUTPUT);
+
+  // initialize the pushbutton pin as an input:
+  pinMode(buttonPin, INPUT);
+}
+
+void loop() {
+  // read the state of the pushbutton value:
+  buttonState = digitalRead(buttonPin);
+
+  // check if the pushbutton is pressed. If it is, the buttonState is HIGH:
+  if (buttonState == HIGH) {
+    
+    for(int i = 0; i < 256;i++){ // increase the ledPin value by incrementally until it's fully lit
+      analogWrite(ledPin, i); // set the value of the pin
+      delay(5); // wait 10 milliseconds before moving on
+    }
+
+    for(int i = 0; i < 256;i++){ // increase the ledPin value by incrementally until it's fully lit
+      analogWrite(ledPin2, i); // set the value of the pin
+      delay(5);  // wait 10 milliseconds before moving on
+    }
+
+  } else {
+    // turn both LEDs off if the button isn't currently pressed:
+    digitalWrite(ledPin, LOW);
+    digitalWrite(ledPin2, LOW);
+  }
+}
+
+            </code>>
+    
         </div>
         
     </body>
