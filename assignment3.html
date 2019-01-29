@@ -1,0 +1,86 @@
+<!DOCTYPE html> 
+<html> 
+    <head> 
+        <meta charset="utf-8"> 
+        <meta name="viewport" content="width=device-width, maximum-scale=1.0" />
+
+        <title>jonathan tran's HCDE 439 Physical Computing Page!</title> 
+
+        <link href="style.css" media="screen" rel="stylesheet" type="text/css" />
+
+    </head> 
+    <body> 
+
+        <div class="header">
+            <h1>jonathan's Assignment 2!</h1>
+            <p>
+            Here is all the documentation for assignment 3!
+            </p>
+
+                <p>
+                    here are the calculations and schematic, 
+                    i used 1k resistors because i calculated a need of at least 160 ohms of resistance to be safe but had 1k resistors available.
+
+                <img src="IMG_4117.JPG" width=400></a>
+                </p>
+
+            <p>
+              here's what the circuit looks like:
+                <img src="IMG_4118.JPG" width=400></a>
+
+            </p>
+
+        </div>
+
+
+        <div>
+            <h1>in action</h1>
+            <img src="IMG_4115.gif" width=400></a>
+
+            <p> here's the code</p>
+            <pre>
+                <code>
+int analogInPin = A0; // set the input pin for the potentiometer
+int redLedPin = 9;    // set the pin for the red LED
+int greenLedPin = 12; // set the pin for the green LED
+int sensorValue = 0;  // variable to store the value coming from the sensor
+int outputValue = 0;  // variable to store the value for the output
+
+
+
+void setup() {
+  pinMode(redLedPin, OUTPUT);   // set the redLedPin as an output
+  pinMode(greenLedPin, OUTPUT); // set the greenLedPin as an output
+  pinMode(analogInPin, INPUT);  // set the analogInPin as an input
+  Serial.begin(9600);           // initalize serial communications at 9600 
+}
+
+
+void loop() {
+
+  sensorValue = analogRead(analogInPin);              // read the analog in value
+  outputValue = map(sensorValue, 0, 1023, 0, 255);    // map the sensor value to the blue LED
+
+  // print the results to the Serial Monitor:
+  Serial.print("sensor = ");
+  Serial.print(sensorValue);
+  Serial.print("\t output = ");
+  Serial.println(outputValue);
+
+
+  // if not enough light hits the sensor, turn on the red LED and turn off the green LED (it's 50 cause the room I was testing this in was relatively dark and the sensor averaged around 90 regularly)
+  if (sensorValue < 50) {
+    digitalWrite(redLedPin, HIGH);
+    digitalWrite(greenLedPin, LOW);
+  } else { // if enough light does hit the sensor, turn off the red LED and turn on the green LED
+    digitalWrite(greenLedPin, HIGH);
+    digitalWrite(redLedPin, LOW);
+  }
+}
+                </code>>
+            </pre>
+    
+        </div>
+        
+    </body>
+</html>
