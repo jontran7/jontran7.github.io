@@ -1,0 +1,65 @@
+
+<!DOCTYPE html> 
+<html> 
+    <head> 
+        <meta charset="utf-8"> 
+        <meta name="viewport" content="width=device-width, maximum-scale=1.0" />
+
+        <title>Jonathan Tran's HCDE 439 Physical Computing Page!</title> 
+
+        <link href="style.css" media="screen" rel="stylesheet" type="text/css" />
+
+    </head> 
+    <body> 
+
+        <div class="header">
+            <h1>Jonathan Tran's Assignment 4!</h1>
+            <p> The LED strip turns on when the light sensor isn't getting enough light
+            <img src="IMG.4210.GIF" width=400></a>
+
+            The circuit board
+            <img src="IMG_4213.JPG" width=400></a>
+
+            <p> the code</p>
+            <pre><code>
+      const int analogInPin = A0;  // Analog input pin that the photoresistor is attached to
+      const int LED = 10; // Analog output pin that the LED Strip is attached to
+
+      int sensorValue = 0;  // variable to store the value coming from the sensor
+      int outputValue = 0;  // variable to store the value for the output
+
+      void setup() {
+        pinMode(LED, OUTPUT);         // set the LED Strip as output
+        pinMode(analogInPin, INPUT);  // set the analogInpin (the light sensor) as input
+        Serial.begin(9600);           // initialize serial communications at 9600:
+      }
+
+      void loop() {
+        
+        sensorValue = analogRead(analogInPin);           // read the analog in value
+        outputValue = map(sensorValue, 0, 50, 0, 255);   // map the sensor value to the LED Strip
+        
+        if (sensorValue > 70) {                          // if the sensor value is greater than 70, turn the LED Strip off. (if there's enough light, turn the LED strip off)
+          
+          analogWrite(LED, 0);                           // turn LED Strip off by setting output to 0.
+          Serial.print("Off ");                          // print to serial monitor, "Off"
+        
+        } else if (sensorValue <= 70) {                  // if the output value is less than or equal to 200, turn the LED Strip on
+          
+          analogWrite(LED, outputValue);                 // turn the LED strip on by setting the brightness to outputValue
+          Serial.print("On ");                           // print to serial monitor, "Off"
+        }
+        
+        Serial.println(sensorValue);                     // print sensor value to the serial monitor
+      }
+            
+        </code></pre>
+
+
+        <div> 
+        schematic and the calculations
+        <img src="IMG_4213.JPG">
+        <img src="iMG_4214.JPG">
+
+        </div>
+</html>
