@@ -1,0 +1,79 @@
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, maximum-scale=1.0" />
+
+        <link href="style.css" media="screen" rel="stylesheet" type="text/css" />
+
+      </head>
+      <body>
+
+          <div class="header">
+              <h1>Jonathan Tran Assignment 5: motors</h1>
+              <p>
+              A picture of the schematic:
+              </p>
+              
+              <p>
+              <img src="IMG_4296.JPG" height=400></a>
+              </p>
+
+              <p>
+              What the circuit looks like:
+              </p>
+              <p>
+              <img src="IMG_4295.JPG" width=400></a>
+              </p>
+              <p>
+              Here's my code:
+              </p>
+              <pre>
+              <code>
+#include <Servo.h>
+
+const int x = A0;         // set the analog input pin for X value as A0
+const int y = A1;         // set the analog input pin for Y value as A1
+const int pinServo = 9;   // Input pin that servo motor is attached to
+int xval = 0;             // value of X
+int yval = 0;             // value of Y
+Servo myServo;            // Creates servo object
+
+void setup() {
+  Serial.begin(9600);         // initialize serial communications at 9600
+  myServo.attach(pinServo);   // attaches the servo to the correspoding pin
+}
+
+void loop() {
+  xval = analogRead(x);   // Reads joystick X value from input pin
+  yval = analogRead(y);   // Reads joystick Y value from input pin
+
+  // this set of code is for writing the input values to the serial monitor.
+  Serial.print("x = ");
+  Serial.println(xval);
+  Serial.print("y = ");
+  Serial.println(yval);
+  Serial.println();  
+ 
+  if (xval > 900 && yval > 900) {
+      myServo.write(0);  // set servo to mid-point
+  } else if (xval > 0 && yval > 0) {
+      myServo.write(180);  // set servo to mid-point
+  }
+
+}
+               </code>
+          </pre>
+          <p>
+
+          </p>
+              <p>
+              In Action
+              </p>
+              <p>
+              <img src="IMG_4294_small.gif" height=500></a>
+              </p>
+            </div>
+      </body>
+  </html>
